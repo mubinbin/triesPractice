@@ -10,7 +10,7 @@ class EscapeRoomKeypad{
         Node(){
             count = 0;
         }
-        Node(int c, String word){
+        Node(String word){
             count = 1;
             this.word = word;
         }
@@ -29,12 +29,12 @@ class EscapeRoomKeypad{
         
         private void addWord(Node node, String word, String finalWord){
 
-            // if(node == null) node = new Node();
+            // return condition
             if(word.length() == 1){
                 
                 finalWord += word;
                 if(node.next[word.charAt(0) - 'A'] == null){
-                    node.next[word.charAt(0) - 'A'] = new Node(1, finalWord);
+                    node.next[word.charAt(0) - 'A'] = new Node(finalWord);
                 }else{
                     node.next[word.charAt(0) - 'A'].count++;
                     node.next[word.charAt(0) - 'A'].word = finalWord;
@@ -68,6 +68,6 @@ class EscapeRoomKeypad{
         testTries.add("AB");
         testTries.add("BB");
 
-        System.out.println(testTries.root);
+        System.out.println(testTries.root.toString());
     }
 }
