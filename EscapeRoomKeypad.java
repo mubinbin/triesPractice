@@ -26,7 +26,25 @@ class EscapeRoomKeypad{
             String finalWord = "";
             addWord(root, word, finalWord);
         }
-        
+
+        public boolean contains(String inputWord){
+            String finalWord = "";
+            return contains(root, inputWord, finalWord);
+        }
+
+        private boolean contains(Node node, String inputWord, String finalWord) {
+            // return condition
+            if (inputWord.length() == 1) {
+                return (node.next[inputWord.charAt(0) - 'A'] != null && node.next[inputWord.charAt(0) - 'A'].count > 0);
+            }
+
+            int position = inputWord.charAt(0) - 'A';
+            if (node.next[position] == null) return false;
+
+            finalWord += inputWord.charAt(0);
+            return contains(node.next[position], inputWord.substring(1), finalWord);
+        }
+
         private void addWord(Node node, String word, String finalWord){
 
             // return condition
@@ -68,6 +86,10 @@ class EscapeRoomKeypad{
         testTries.add("AB");
         testTries.add("BB");
 
-        System.out.println(testTries.root.toString());
+        System.out.println(testTries.contains("AB")); //t
+        System.out.println(testTries.contains("ABC"));//t
+        System.out.println(testTries.contains("AC"));//f
+        System.out.println(testTries.contains("Z"));//f
+        System.out.println(testTries.contains("CB"));//f
     }
 }
